@@ -24,3 +24,7 @@ venv/
 # Ignore log files and temp files
 *.log
 *.tmp
+
+# Ignore PyInstaller build directories and files
+build/
+dist/
