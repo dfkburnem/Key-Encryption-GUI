@@ -108,54 +108,60 @@ def update_key_entries():
         key_name_entry.grid(row=i, column=3, padx=5, pady=5)
         key_name_entries.append(key_name_entry)
 
-root = tk.Tk()
-root.title("Encrypt Private Keys")
-root.geometry("800x600")
-root.configure(bg='black')
+def main_entry():
+    global password_entry, num_keys_entry, directory_entry, private_key_entries, key_name_entries, scrollable_frame
 
-tk.Label(root, text="Password:", bg='black', fg='white').grid(row=0, column=0, padx=5, pady=5, sticky='e')
-password_entry = tk.Entry(root, show='*', width=50, bg='black', fg='white', insertbackground='white')
-password_entry.grid(row=0, column=1, padx=5, pady=5)
+    root = tk.Tk()
+    root.title("Encrypt Private Keys")
+    root.geometry("800x600")
+    root.configure(bg='black')
 
-tk.Label(root, text="Number of Keys:", bg='black', fg='white').grid(row=1, column=0, padx=5, pady=5, sticky='e')
-num_keys_entry = tk.Entry(root, width=50, bg='black', fg='white', insertbackground='white')
-num_keys_entry.grid(row=1, column=1, padx=5, pady=5)
-num_keys_entry.bind("<KeyRelease>", lambda event: update_key_entries())
+    tk.Label(root, text="Password:", bg='black', fg='white').grid(row=0, column=0, padx=5, pady=5, sticky='e')
+    password_entry = tk.Entry(root, show='*', width=50, bg='black', fg='white', insertbackground='white')
+    password_entry.grid(row=0, column=1, padx=5, pady=5)
 
-tk.Label(root, text="Save Directory:", bg='black', fg='white').grid(row=2, column=0, padx=5, pady=5, sticky='e')
-directory_entry = tk.Entry(root, width=50, bg='black', fg='white', insertbackground='white')
-directory_entry.grid(row=2, column=1, padx=5, pady=5)
-tk.Button(root, text="Browse", command=select_directory, bg='black', fg='white').grid(row=2, column=2, padx=5, pady=5)
+    tk.Label(root, text="Number of Keys:", bg='black', fg='white').grid(row=1, column=0, padx=5, pady=5, sticky='e')
+    num_keys_entry = tk.Entry(root, width=50, bg='black', fg='white', insertbackground='white')
+    num_keys_entry.grid(row=1, column=1, padx=5, pady=5)
+    num_keys_entry.bind("<KeyRelease>", lambda event: update_key_entries())
 
-frame = tk.Frame(root, bg='black')
-frame.grid(row=4, column=0, columnspan=4, padx=5, pady=5, sticky='nsew')
+    tk.Label(root, text="Save Directory:", bg='black', fg='white').grid(row=2, column=0, padx=5, pady=5, sticky='e')
+    directory_entry = tk.Entry(root, width=50, bg='black', fg='white', insertbackground='white')
+    directory_entry.grid(row=2, column=1, padx=5, pady=5)
+    tk.Button(root, text="Browse", command=select_directory, bg='black', fg='white').grid(row=2, column=2, padx=5, pady=5)
 
-canvas = tk.Canvas(frame, bg='black', highlightthickness=0)
-scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
-scrollable_frame = tk.Frame(canvas, bg='black')
+    frame = tk.Frame(root, bg='black')
+    frame.grid(row=4, column=0, columnspan=4, padx=5, pady=5, sticky='nsew')
 
-scrollable_frame.bind(
-    "<Configure>",
-    lambda e: canvas.configure(
-        scrollregion=canvas.bbox("all")
+    canvas = tk.Canvas(frame, bg='black', highlightthickness=0)
+    scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
+    scrollable_frame = tk.Frame(canvas, bg='black')
+
+    scrollable_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(
+            scrollregion=canvas.bbox("all")
+        )
     )
-)
 
-canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-canvas.configure(yscrollcommand=scrollbar.set)
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
 
-canvas.pack(side="left", fill="both", expand=True)
-scrollbar.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
 
-private_key_entries = []
-key_name_entries = []
+    private_key_entries = []
+    key_name_entries = []
 
-tk.Button(root, text="Create Keys", command=create_keys, bg='black', fg='white').grid(row=3, column=1, padx=5, pady=20)
+    tk.Button(root, text="Create Keys", command=create_keys, bg='black', fg='white').grid(row=3, column=1, padx=5, pady=20)
 
-root.grid_rowconfigure(4, weight=1)
-root.grid_columnconfigure(0, weight=1)
-frame.grid_rowconfigure(0, weight=1)
-frame.grid_columnconfigure(0, weight=1)
-canvas.pack_propagate(False)
+    root.grid_rowconfigure(4, weight=1)
+    root.grid_columnconfigure(0, weight=1)
+    frame.grid_rowconfigure(0, weight=1)
+    frame.grid_columnconfigure(0, weight=1)
+    canvas.pack_propagate(False)
 
-root.mainloop()
+    root.mainloop()
+
+if __name__ == "__main__":
+    main_entry()

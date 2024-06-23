@@ -2,6 +2,31 @@
 
 This project provides a GUI for encrypting private keys. Keys are encrypted using a password provided by the user and stored as a key file. This key file is decrypted using the encryption password and used for wallet operations in other tools within the main repository.
 
+## Installation
+
+You can install the package directly from the releases.
+
+### Source Code
+
+1. To install the package, run:
+
+```bash
+pip install https://github.com/dfkburnem/Key-Encryption-GUI/releases/download/v1.0.1/key_encryption_gui-1.0.1.tar.gz
+```
+2. Run script using:
+
+```bash
+key_encryption_gui
+```
+
+### Executable
+
+Download the executable from the releases page and run it directly:
+
+1. Go to the [releases page](https://github.com/dfkburnem/Key-Encryption-GUI/releases).
+2. Download the executable file (Key Encryption GUI.exe).
+3. Run the executable.
+
 ## Usage
 
 1. **Enter a Password:** Provide a password that will be used for encryption.
